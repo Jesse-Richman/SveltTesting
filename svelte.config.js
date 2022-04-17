@@ -24,7 +24,7 @@ const config = {
 					// is the URI created by Gitpod.
 					host: process.env.GITPOD_WORKSPACE_URL.replace("https://", "3000-"),
 					protocol: "wss",
-					clientPort: 443
+					clientPort: process.env.GITPOD_WORKSPACE_URL ? 443 : 3000
 				  }
 				: true
 			}
