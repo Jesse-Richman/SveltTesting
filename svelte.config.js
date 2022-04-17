@@ -16,11 +16,17 @@ const config = {
 		},
 		vite: {
 			server: {
-				hmr: {
-					host: process.env.HMR_HOST ? process.env.HMR_HOST.substring("https://".length) : "localhost",
-					protocol: 'wss',
-					clientPort: process.env.HMR_HOST ? 443 : 3000
-				}
+				// Configure Vite for HMR with Gitpod.
+				hmr: process.env.GITPOD_WORKSPACE_URL
+				? {
+					// Due to port fowarding, we have to replace
+					// 'https' with the forwarded port, as this
+					// is the URI created by Gitpod.
+					host: process.env.GITPOD_WORKSPACE_URL.replace("https://", "3000-"),
+					protocol: "wss",
+					clientPort: 443
+				  }
+				: true
 			}
 		}
 	}
